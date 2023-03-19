@@ -68,8 +68,7 @@ model VerificationToken {
 
 model ClubRoom {
         id          String @id @defualt(cuid()) 
-        createdId   String
-        createdBy   User      @relation(fields: [createdId], references [id])
+        createdById   String
         createdAt   DateTime
         admins      String[]
         users       String[]
@@ -77,14 +76,16 @@ model ClubRoom {
         useDeadLine DateTime
         arcDeadLine DateTime
         posts       Post[]
+        createdBy   User      @relation(fields: [createdById], references: [id], onDelete: Cascade)
+}
     }
 
 model Post {
         id          String @id @default(cuid())
         authorId    String
-        author      User @relation(fields: [authorId], references [id])
+        author      User    @relation(fields: [authorId], references: [id], onDelete: Cascade)
         roomId      String
-        room        ClubRoom @relation(fields: [roomId], references [id])
+        room        ClubRoom @relation(fields: [roomId], references: [id], onDelete: Cascade)
         createdAt   DateTime
         content     String
 }
