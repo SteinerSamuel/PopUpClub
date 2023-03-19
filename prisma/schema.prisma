@@ -84,7 +84,13 @@ model Post {
         authorId    String
         author      User @relation(fields: [authorId], references [id])
         roomId      String
-        Room        ClubRoom @relation(fields: [roomId], references [id])
+        room        ClubRoom @relation(fields: [roomId], references [id])
         createdAt   DateTime
         content     String
+}
+
+model Redirect {
+        id          String @id @default(cuid())
+        clubRoomId  String
+        clubRoom    ClubRoom @relation(fields: [clubRoomId], references [id])
 }
