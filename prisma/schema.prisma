@@ -93,5 +93,5 @@ model Post {
 model Redirect {
         id          String @id @default(cuid())
         clubRoomId  String
-        clubRoom    ClubRoom @relation(fields: [clubRoomId], references [id])
+        clubRoom    ClubRoom @relation(fields: [clubRoomId], references: [id], onDelete: Cascade)
 }
